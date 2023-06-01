@@ -13,7 +13,7 @@ export const useFullAge = () => {
     const { days, years, months } = intervalToDuration({
       start: new Date(
         Number(birthday.year),
-        Number(birthday.month),
+        Number(birthday.month) - 1,
         Number(birthday.day)
       ),
       end: new Date(),
