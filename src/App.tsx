@@ -6,6 +6,10 @@ import { useFullAge } from "./hooks/useFullAge";
 import { Birthday } from "./types";
 import { schema } from "./utils/birthday-validation";
 
+interface Form {
+  inputValues: Birthday;
+}
+
 function App() {
   const { age, calculateFullAge } = useFullAge();
   const {
@@ -13,7 +17,7 @@ function App() {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<Birthday>({ resolver: yupResolver(schema) });
+  } = useForm<Form["inputValues"]>({ resolver: yupResolver(schema) });
 
   const onSubmit: SubmitHandler<Birthday> = (data) => {
     calculateFullAge(data);
@@ -24,7 +28,7 @@ function App() {
     <div className="flex h-screen items-center justify-center">
       <main
         className="mx-auto w-11/12 max-w-3xl space-y-16 rounded-2xl rounded-br-[100px] 
-        bg-white px-4 py-14 shadow sm:w-3/4 sm:rounded-br-[150px] md:px-16 lg:rounded-br-[200px]"
+        bg-white px-4 py-14 shadow sm:rounded-br-[150px] md:px-16 lg:rounded-br-[200px]"
       >
         <form className="flex gap-4 lg:gap-8">
           <div>
@@ -105,19 +109,19 @@ function App() {
         <div>
           <h1 className="text-5xl font-bold italic sm:text-6xl lg:text-8xl">
             <span className="pr-5 text-violet-600">
-              {age.year !== null ? age.year : "--"}
+              {age.year !== 0 ? age.year : "--"}
             </span>
             years
           </h1>
           <h1 className="text-5xl font-bold italic sm:text-6xl lg:text-8xl">
             <span className="pr-5 text-violet-600">
-              {age.month !== null ? age.month : "--"}
+              {age.month !== 0 ? age.month : "--"}
             </span>
             months
           </h1>
           <h1 className="text-5xl font-bold italic sm:text-6xl lg:text-8xl">
             <span className=" pr-5 text-violet-600">
-              {age.day !== null ? age.day : "--"}
+              {age.day !== 0 ? age.day : "--"}
             </span>
             days
           </h1>

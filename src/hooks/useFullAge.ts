@@ -4,18 +4,14 @@ import { Birthday } from "../types";
 
 export const useFullAge = () => {
   const [age, setAge] = useState<Birthday>({
-    day: null,
-    month: null,
-    year: null,
+    day: 0,
+    month: 0,
+    year: 0,
   });
 
   const calculateFullAge = (birthday: Birthday) => {
     const { days, years, months } = intervalToDuration({
-      start: new Date(
-        Number(birthday.year),
-        Number(birthday.month) - 1,
-        Number(birthday.day)
-      ),
+      start: new Date(birthday.year, birthday.month - 1, birthday.day),
       end: new Date(),
     });
 
